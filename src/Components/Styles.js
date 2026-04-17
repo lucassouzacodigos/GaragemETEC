@@ -6,6 +6,7 @@ const { height, width } = Dimensions.get("screen")
 
 export const css = StyleSheet.create({
     AzulPrincipal: "#225AF4",
+    VerdeClaro: "#28ee00",
 
 
     FlexCenter:{
@@ -38,6 +39,12 @@ export const css = StyleSheet.create({
         borderRadius:7,
         fontWeight:"bold"
     },
+    botaComImg:{
+        width:50,
+        height:50,
+        backgroundColor:"#28ee00",
+                 
+    },
     botao:{
         margin:5,
         fontWeight: "bold",
@@ -47,6 +54,7 @@ export const css = StyleSheet.create({
         borderWidth: 2,
         borderColor: "rgba(53, 53, 53, 1)00ff"
     },
+    // text
     logoText1:{
         color:"white",
         width:"100%",
@@ -58,4 +66,8 @@ export const css = StyleSheet.create({
         fontSize:70,
         fontWeight:"bold",
     },
+    TituloPagina:{
+        fontSize:30,
+        fontWeight:"bold"
+    }
 })

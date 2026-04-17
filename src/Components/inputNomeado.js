@@ -4,15 +4,15 @@ import { css } from '../Components/Styles'
 
 
 
-export default function InputNomeado({titulo, onChangeText}){
+export default function InputNomeado({titulo, onChangeText, conectivo}){
 
 
 
     return(
-        <View style={{width:"90%"}}>
-            <Text>{titulo}</Text>
+        <View style={{width:"90%", backgroundColor:"transparent", margin:8}}>
+            <Text style={{paddingLeft:"1%", fontWeight:"bold"}}>{titulo}</Text>
             <TextInput
-                placeholder={titulo} 
+                placeholder={`Insira ${conectivo} ${titulo}`} 
                 style={css.inputComBorda} 
                 onChangeText={onChangeText}
             />

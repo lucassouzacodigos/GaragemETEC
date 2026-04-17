@@ -11,7 +11,7 @@ import { collection, addDoc } from "firebase/firestore";
 import carroLogo from '../../../assets/carroLogo.png'
 import InputNomeado from "../../../Components/inputNomeado";
 import marcas from '../../../Listas/marcas'
-
+import BotaoComImg from "../../../Components/botaoComImg";
 
 
 
@@ -39,6 +39,9 @@ export default function home(){
     const [camposCarros, setCamposCarros] = useState(1)
     const [nome, setNome] = useState()
     const [carros, setCarros] = useState()
+    const [modelo, setModelo] = useState()
+    const [cor, setCor] = useState()
+    const [usuario, setUsuario] = useState()
 
     return(
 
@@ -53,20 +56,20 @@ export default function home(){
                     <Text>HEADER</Text>
                 </View>
 
-
-
-                <InputNomeado onChangeText={setNome} titulo="Nome:" />
-                <View style={{width:"100%", backgroundColor:"transparent", alignItems:"center"}}>
-                    {Array.from({length: camposCarros}).map((_, index) => {
-                        return(
-                            <InputNomeado key={index} titulo={`Carro ${(index+1).toString()}:`} ></InputNomeado>
-                        )
-                    })}
+                <View style={{ width:"100%", paddingHorizontal:"8%"}}>
+                    <Text style={[css.TituloPagina, {}]}>Cadastro de carro:</Text>
                 </View>
+
+                <ItemBlock>
+                    <InputNomeado titulo={`Carro:`} conectivo={"seu"} ></InputNomeado>
+                    <InputNomeado titulo={`Modelo:`} conectivo={"o"} ></InputNomeado>
+                    <InputNomeado titulo={`Cor:`} conectivo={"a"} ></InputNomeado>
+                    <InputNomeado titulo={`Usuário:`} conectivo={"o"} ></InputNomeado>
+                    <BotaoComImg></BotaoComImg>
+                </ItemBlock>
 
                 <Botao largura={200}  text="addcarro" acao={() => {addCarro()}}/>
                 <Botao largura={200}  text="subcarro" acao={() => {subCarro()}}/>
-                <Botao largura={200}  text="cadastro carro" acao={() => (router.push("/cadastros/cadastroCarro"))}/>
                     <Text>total de campos {camposCarros}</Text>
             </View>
 

@@ -10,12 +10,9 @@ import { useState } from "react";
 
 export default function itemBlock({children}){
     return (
-        <View style={[css.FlexCenter, {backgroundColor:"#F5F5F5", width:"90%", height:"auto", flexDirection:"row", justifyContent:"center", elevation:10, borderRadius:5, marginVertical:15}]}>
-            
+        <View style={[css.FlexCenter, {backgroundColor:"white", width:"90%", height:"auto", flexDirection:"column", justifyContent:"center", elevation:1, borderRadius:10, borderWidth:0.5, marginVertical:15}]}>
 
             {children}
-            
-            
 
         </View>
     )
