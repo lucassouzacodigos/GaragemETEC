@@ -5,6 +5,9 @@ const { height, width } = Dimensions.get("screen")
 
 
 export const css = StyleSheet.create({
+    AzulPrincipal: "#225AF4",
+
+
     FlexCenter:{
         alignItems: "center",
         justifyContent: "center",
@@ -28,12 +31,31 @@ export const css = StyleSheet.create({
         borderColor: "black",
         margin: 13,
     },
+    inputComBorda:{
+        margin:1,
+        backgroundColor:"#F5F5F5",
+        width:"100%",
+        borderRadius:7,
+        fontWeight:"bold"
+    },
     botao:{
+        margin:5,
         fontWeight: "bold",
         height: 30,
         backgroundColor: "#f5f5f5",
         borderRadius: 15,
         borderWidth: 2,
         borderColor: "rgba(53, 53, 53, 1)00ff"
+    },
+    logoText1:{
+        color:"white",
+        width:"100%",
+        fontSize:70,
+        fontWeight:"bold",
+    },
+    logoText2:{
+        paddingBottom:"2%",
+        fontSize:70,
+        fontWeight:"bold",
     },
 })

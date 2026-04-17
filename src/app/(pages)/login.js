@@ -45,6 +45,8 @@ export default function login(){
 
                 <Botao text="Entrar" largura="120" acao={() => router.push("/home")} cor="green" />
                 <Botao text="Firebase" largura="120" acao={() => router.push("/firebase")} cor="green" />
+                <Botao text="SplashScreen" largura="250" acao={() => router.push("/splash/splashScreen")} cor="pink" />
+                <Botao text="Cadastros usuarios" largura="250" acao={() => router.push("/cadastros/cadastroUsuario")} cor="brown" />
 
                 <Text>Usuario: {user}</Text>
                 <Text>Senha: {senha}</Text>

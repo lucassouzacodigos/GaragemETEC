@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../Components/Styles";
@@ -25,6 +25,8 @@ export default function home(){
     } 
         
 
+    const router = useRouter()
+
     const [marca, setMarca] = useState('')
     const [modelo, setModelo] = useState('')
     const [cor, setCor] = useState('')
@@ -43,6 +45,7 @@ export default function home(){
                 <TextInput style={{backgroundColor:"white", width:"80%", borderRadius:15, borderColor:"black", borderWidth:1, textAlign:"center"}} onChangeText={setCor} placeholder="Cor"></TextInput>
                 
                 <Botao text="cadastrar" largura="200" acao={cadastrar} cor="lightblue" /> 
+                <Botao text="fodase" largura="200" acao={() => router.push("/splash/splashScreen")} cor="pink" /> 
 
             </View>
 
