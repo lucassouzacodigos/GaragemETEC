@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../Components/Styles";
 import Botao from "../../Components/botao"
 import { useState } from "react";
-import Header from "../../Components/header"
 import ItemBlock from "../../Components/itemBlock"
 
 

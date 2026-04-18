@@ -4,7 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../../Components/Styles";
 import Botao from "../../../Components/botao"
 import { useState } from "react";
-import Header from "../../../Components/header"
 import ItemBlock from "../../../Components/itemBlock"
 import { db } from "../../../Services/FirebaseParams";
 import { collection, addDoc } from "firebase/firestore";
