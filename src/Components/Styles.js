@@ -7,7 +7,9 @@ const { height, width } = Dimensions.get("screen")
 export const css = StyleSheet.create({
     AzulPrincipal: "#225AF4",
     VerdeClaro: "#28ee00",
-
+    bold: {
+        fontWeight:"bold"
+    },
 
     FlexCenter:{
         alignItems: "center",
@@ -141,5 +143,21 @@ export const css = StyleSheet.create({
         justifyContent:"center",
         flexWrap:"wrap",
     },
-    
+    RegistroBlock:{
+        paddingLeft:"15%",
+        width:"90%", 
+        height:"auto",
+        minHeight:50, 
+        margin:5,
+        borderBottomColor:"black",
+        borderBottomWidth:1,
+        justifyContent:"center",
+        alignItems:"center",
+    },
+    bola:{
+        width:16,
+        height:16,
+        borderRadius:500, 
+        backgroundColor:"orange"
+    },
 })
