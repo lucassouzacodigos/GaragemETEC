@@ -48,6 +48,9 @@ export default function login(){
                 <Botao text="SplashScreen" largura="250" acao={() => router.push("/splash/splashScreen")} cor="pink" />
                 <Botao text="Cadastros usuarios" largura="250" acao={() => router.push("/cadastros/cadastroUsuario")} cor="brown" />
                 <Botao text="Cadastros CARR" largura="250" acao={() => router.push("/cadastros/cadastroCarro")} cor="yellow" />
+                <Botao text="home" largura="250" acao={() => router.push("/home")} cor="red" />
+                <Botao text="entrada" largura="250" acao={() => router.push("/controle/entrada")} cor="lightblue" />
+                <Botao text="saida" largura="250" acao={() => router.push("/controle/saida")} cor="orange" />
 
                 <Text>Usuario: {user}</Text>
                 <Text>Senha: {senha}</Text>

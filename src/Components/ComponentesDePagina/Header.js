@@ -11,7 +11,7 @@ export default function Header(props){
 
 
     return(
-        <View style={{width:"100%", flexDirection:"row", height:90, backgroundColor:css.AzulPrincipal, alignItems:"center", justifyContent:"center"  }}>
+        <View style={{width:"100%", flexDirection:"row", height:"14%", backgroundColor:css.AzulPrincipal, alignItems:"center", justifyContent:"center"  }}>
             <Text style={{fontSize:45, fontWeight:"bold", color:"white"}}>Garagem</Text>
             <Ionicons name="car-sport" size={50} color="black" style={{margin:5}}/>
             <Text style={{fontSize:45, fontWeight:"bold"}}>Etec</Text>

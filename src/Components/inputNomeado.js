@@ -4,18 +4,24 @@ import { css } from '../Components/Styles'
 
 
 
-export default function InputNomeado({titulo, onChangeText, conectivo}){
+export default function InputNomeado({titulo, onChangeText, conectivo, children, value}){
 
 
 
     return(
         <View style={{width:"90%", backgroundColor:"transparent", margin:8}}>
             <Text style={{paddingLeft:"1%", fontWeight:"bold"}}>{titulo}</Text>
-            <TextInput
-                placeholder={`Insira ${conectivo} ${titulo}`} 
-                style={css.inputComBorda} 
-                onChangeText={onChangeText}
-            />
+            <View style={{backgroundColor:"transparent", flexDirection:"row"}}>
+                <TextInput
+                    value={value}
+                    placeholder={`Insira ${conectivo} ${titulo}`} 
+                    style={[css.inputComBorda, {}]} 
+                    onChangeText={onChangeText}
+                />
+                <View style={{backgroundColor:"transparent", position:"absolute", right:0, width:"auto", height:"100%", alignItems:"center", justifyContent:"center"   }}>
+                    {children}
+                </View>
+            </View>
         </View>
     )
 }

@@ -12,6 +12,7 @@ import InputNomeado from "../../../Components/inputNomeado";
 import marcas from '../../../Listas/marcas'
 import BotaoComImg from "../../../Components/botaoComImg";
 import Header from "../../../Components/ComponentesDePagina/Header";
+import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 
 
 
@@ -65,14 +66,16 @@ export default function home(){
 
     return(
 
-        <SafeAreaView style={[css.safeArea, css.FlexCenter]}>
+        <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
             <Stack.Screen options={{headerShown: false}} />
 
             
             <View style={[css.quadrado, css.FlexCenter, {justifyContent:"start"}]}>
-                
+            
+
                 <Header />
 
+            <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
                 <View style={{ width:"100%", paddingHorizontal:"8%"}}>
                     <Text style={[css.TituloPagina, {}]}>Cadastro de pessoa:</Text>
                 </View>
@@ -83,8 +86,11 @@ export default function home(){
                     <BotaoComImg acao={salvarPessoa} img="checkmark-circle-outline" text="Salvar" largura={"80%"} size={30}/>
                     {/* <BotaoComImg acao={() => router.push("/cadastros/cadastroCarro")} img="checkmark-circle-outline" text="Salvar" largura={"80%"} size={30}/> */}
                 </ItemBlock>
-                
-            </View>
+            </ScrollView>
+
+                <NavBar/>
+            
+            </View> 
 
         </SafeAreaView>
     )

@@ -61,7 +61,7 @@ export const css = StyleSheet.create({
         backgroundColor:"#28ee00",
         flexDirection:"row",
         borderRadius:7,
-        borderColor: "#08A400",
+        borderColor: "#225AF4",
         borderWidth:2,
     },
     botao:{
@@ -89,6 +89,57 @@ export const css = StyleSheet.create({
         fontSize:30,
         fontWeight:"bold"
     },
-    
+    navBarContainer:{
+        width:"100%",
+        height:"14%",
+        backgroundColor:"white",
+        flexDirection:"row",
+        alignItems:"start",
+        justifyContent:"space-around",
+        paddingTop:2,
+    },
+    navItemsContainer:{
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"space-around",
+        backgroundColor:"#abcdef",
+        borderRadius:500,
+        height:"60%"
+    },
+    navBarItens:{
+        marginHorizontal:15,
+    },
+    navItem:{
+        alignItems:"center",
+        justifyContent:"center",
+        height:"100%",
+        width:"auto"    
+    },
+    navItemSelected:{
+        alignItems:"center",
+        justifyContent:"center",
+        height:"70%",
+        borderRadius:200,
+        width:"auto",
+        backgroundColor:"#28ee00", 
+        margin:2
+    },
+    mainScroll:{
+        backgroundColor:"white",
+        width:"100%",
+        height:"auto",
+        padding:10
+    },
+    mainScrollContent:{
+        alignItems:"center",
+    },
+    botoesRegistro:{
+        marginVertical:10,
+        width:"100%",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"center",
+        flexWrap:"wrap",
+    },
     
 })

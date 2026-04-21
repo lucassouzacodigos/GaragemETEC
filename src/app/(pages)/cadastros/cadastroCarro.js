@@ -13,6 +13,7 @@ import marcas from '../../../Listas/marcas'
 import BotaoComImg from "../../../Components/botaoComImg";
 import SelectPessoa from "../../../Components/SelectPessoa";
 import Header from "../../../Components/ComponentesDePagina/Header";
+import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 
 
 export default function home(){
@@ -65,31 +66,38 @@ export default function home(){
 
     return(
 
-        <SafeAreaView style={[css.safeArea, css.FlexCenter]}>
+        <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
             <Stack.Screen options={{headerShown: false}} />
 
             
-            <View style={[css.quadrado, css.FlexCenter, {justifyContent:"start"}]}>
+            <View style={[css.quadrado, css.FlexCenter, {justifyContent:"start"}]} >
                 
 
                 <Header />
 
-                <View style={{ width:"100%", paddingHorizontal:"8%"}}>
-                    <Text style={[css.TituloPagina, {}]}>Cadastro de carro:</Text>
-                </View>
+                <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
 
-                <ItemBlock>
-                    <InputNomeado onChangeText={setPlaca} titulo={`Placa:`} conectivo={"seu"} ></InputNomeado>
-                    <InputNomeado onChangeText={setModelo} titulo={`Modelo:`} conectivo={"o"} ></InputNomeado>
-                    <InputNomeado onChangeText={setCor} titulo={`Cor:`} conectivo={"a"} ></InputNomeado>
-                    <SelectPessoa onSelect={(id) => setUsuarioID(id)} ></SelectPessoa>
-                    {/* <InputNomeado onChangeText={} titulo={`Usuário:`} conectivo={"o"} ></InputNomeado> */}
-
-                    <View style={{flexDirection:"row", marginVertical:10}}>
-                        <BotaoComImg acao={salvar} text="Salvar" largura="80%" img="save-outline" size={30}></BotaoComImg>
+                    <View style={{ width:"100%", paddingHorizontal:"8%"}}>
+                        <Text style={[css.TituloPagina, {}]}>Cadastro de carro:</Text>
                     </View>
 
-                </ItemBlock>
+                    <ItemBlock>
+                        <InputNomeado onChangeText={setPlaca} titulo={`Placa:`} conectivo={"seu"} ></InputNomeado>
+                        <InputNomeado onChangeText={setModelo} titulo={`Modelo:`} conectivo={"o"} ></InputNomeado>
+                        <InputNomeado onChangeText={setCor} titulo={`Cor:`} conectivo={"a"} ></InputNomeado>
+                        <SelectPessoa onSelect={(id) => setUsuarioID(id)} ></SelectPessoa>
+                        {/* <InputNomeado onChangeText={} titulo={`Usuário:`} conectivo={"o"} ></InputNomeado> */}
+
+                        <View style={{flexDirection:"row", marginVertical:10}}>
+                            <BotaoComImg acao={salvar} text="Salvar" largura="80%" img="save-outline" size={30}></BotaoComImg>
+                        </View>
+
+                    </ItemBlock>
+
+                </ScrollView>
+
+                <NavBar/>
+
             </View>
 
         </SafeAreaView>

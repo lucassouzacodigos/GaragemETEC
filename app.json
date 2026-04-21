@@ -4,7 +4,7 @@
     "plugins": [
       "expo-router"
     ],
-    "name": "AlunoID-React-Native",
-    "slug": "AlunoID-React-Native"
+    "name": "GaragemEtec",
+    "slug": "GaragemEtec"
   }
 }
