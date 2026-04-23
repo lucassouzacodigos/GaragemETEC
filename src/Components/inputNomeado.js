@@ -9,7 +9,7 @@ export default function InputNomeado({titulo, onChangeText, conectivo, children,
 
 
     return(
-        <View style={{width:"90%", backgroundColor:"transparent", margin:8}}>
+        <View style={{width:"90%", backgroundColor:"transparent", margin:10}}>
             <Text style={{paddingLeft:"1%", fontWeight:"bold"}}>{titulo}</Text>
             <View style={{backgroundColor:"transparent", flexDirection:"row"}}>
                 <TextInput

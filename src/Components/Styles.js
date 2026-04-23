@@ -5,8 +5,8 @@ const { height, width } = Dimensions.get("screen")
 
 
 export const css = StyleSheet.create({
-    AzulPrincipal: "#225AF4",
-    VerdeClaro: "#28ee00",
+    AzulPrincipal: "#3DC2FF",
+    VerdeClaro: "#1ca001",
     bold: {
         fontWeight:"bold"
     },
@@ -36,13 +36,15 @@ export const css = StyleSheet.create({
     },
     inputComBorda:{
         paddingHorizontal:15,
-        margin:1,
+        margin:'',
         backgroundColor:"#F5F5F5",
         width:"100%",
         borderRadius:7,
         borderWidth:1,
         borderColor:"black",
-        fontWeight:"bold"
+        fontWeight:"bold",
+        height: 35,
+
     },
     dropdown: {
         paddingHorizontal: 15,
@@ -63,7 +65,7 @@ export const css = StyleSheet.create({
         backgroundColor:"#28ee00",
         flexDirection:"row",
         borderRadius:7,
-        borderColor: "#225AF4",
+        borderColor: "#28ee00",
         borderWidth:2,
     },
     botao:{
@@ -104,7 +106,7 @@ export const css = StyleSheet.create({
         flexDirection:"row",
         alignItems:"center",
         justifyContent:"space-around",
-        backgroundColor:"#abcdef",
+        backgroundColor:"#3DC2FF",
         borderRadius:500,
         height:"60%"
     },
@@ -160,4 +162,16 @@ export const css = StyleSheet.create({
         borderRadius:500, 
         backgroundColor:"orange"
     },
+    botaoLaranja:{
+        backgroundColor:"#F97316",
+        width: 180,
+        height: 80,
+        borderWidht: 1,
+        alignItems:"center",
+        justifyContent:"center",
+        borderRadius:20,
+        marginTop: 10,
+        borderColor:"#F97316",
+        flexDirection:"row",
+    }
 })

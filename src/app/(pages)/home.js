@@ -13,10 +13,16 @@ import marcas from '../../Listas/marcas'
 import BotaoComImg from "../../Components/botaoComImg";
 import Header from "../../Components/ComponentesDePagina/Header";
 import NavBar from "../../Components/ComponentesDePagina/NavBar";
+import BotaoLaranja from "../../Components/botaoLaranja";
+import adicionarUser from "../../assets/adicionarUser.png";
+import adicionarCarro from "../../assets/adicionarCarro.png";
 
 
 export default function Registros(){
 
+    const salvar = () => {
+        console.log("adicionar")
+    }
 
     return(
         <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
@@ -28,22 +34,12 @@ export default function Registros(){
                 
                 <ScrollView style={css.mainScroll} contentContainerStyle={css.mainScrollContent}>
 
-                    <Text>asd</Text>
-
-                    <View style={[css.botoesRegistro, {backgroundColor:"lightblue"}]}>
-                        <BotaoComImg largura={"93%"} />
-                        <BotaoComImg largura={"45%"} />
-                        <BotaoComImg largura={"45%"} />
-                    </View>
-
-                    <ItemBlock>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                    </ItemBlock>
-
+                <BotaoComImg acao={salvar} text="Adicionar" largura="95%" img="add" size={35}></BotaoComImg>
+                
+                <View style={{flexDirection: "row", justifyContent:"space-around", width:"100%", marginBottom:20}}>
+                <BotaoLaranja textoBotao="Usuários" imagemBotao={adicionarUser} funcao={salvar}/>
+                <BotaoLaranja textoBotao="Veículos" imagemBotao={adicionarCarro} funcao={salvar}/>
+                </View>
 
                 </ScrollView>
 

@@ -65,7 +65,7 @@ export default function RegistroBlock({carro, refresh}){
                 <Text style={css.bold}>Nome: </Text>
                 <Text numberOfLines={1} adjustsFontSizeToFit style={{fontWeight:"bold", width:"50%"}}>{carro.nome}</Text>
                 <Text style={css.bold}>Status: </Text>
-                <Text style={[css.bola, {backgroundColor: carro.status == null ? "green" : "red"}]} > </Text>
+                <Text style={[css.bola, {backgroundColor: carro.status == null ? "#28ee00" : "red"}]} > </Text>
             </View>
 
             {/* Linha de baixo */}
