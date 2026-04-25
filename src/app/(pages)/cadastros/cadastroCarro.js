@@ -14,6 +14,7 @@ import BotaoComImg from "../../../Components/botaoComImg";
 import SelectPessoa from "../../../Components/SelectPessoa";
 import Header from "../../../Components/ComponentesDePagina/Header";
 import NavBar from "../../../Components/ComponentesDePagina/NavBar";
+import Alerts from "../../../Components/alerts";
 
 
 export default function home(){
@@ -43,7 +44,11 @@ export default function home(){
             cor == null || cor == undefined || cor == '' ||
             usuarioID == null || usuarioID == undefined || usuarioID == ''
         ){
-            alert("Preencha corretamente todos os campos")
+            setAlertData({
+                visible: true,
+                mensagem: "Preencha todos os campos",
+                tipo: "erro"
+            });
             return
         }
 
@@ -54,6 +59,12 @@ export default function home(){
             cor: cor,
             usuarioID: usuarioID
         })
+
+        setAlertData({
+            visible: true,
+            mensagem: "Carro cadastrado com sucesso",
+            tipo: "sucesso"
+        });
     }
         
 
@@ -63,6 +74,12 @@ export default function home(){
     const [modelo, setModelo] = useState()
     const [cor, setCor] = useState()
     const [usuarioID, setUsuarioID] = useState()
+
+    const [alertData, setAlertData] = useState({
+        visible: false,
+        mensagem: "",
+        tipo: "sucesso"
+    });
 
     return(
 
@@ -99,6 +116,15 @@ export default function home(){
                 <NavBar/>
 
             </View>
+
+            {/* ALERT */}
+            <Alerts 
+            visible={alertData.visible} 
+            hide={() => setAlertData({...alertData, visible: false})}
+            alerta={alertData.mensagem}
+            duration={1500}
+            type={alertData.tipo}
+            />
 
         </SafeAreaView>
     )

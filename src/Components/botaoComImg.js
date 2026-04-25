@@ -3,6 +3,7 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from "reac
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../Components/Styles"
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { MaterialCommunityIcons as Icones } from "@expo/vector-icons";
 
 
 export default function BotaoComImg(props){

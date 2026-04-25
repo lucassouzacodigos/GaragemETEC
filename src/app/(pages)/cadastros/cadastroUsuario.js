@@ -13,6 +13,7 @@ import marcas from '../../../Listas/marcas'
 import BotaoComImg from "../../../Components/botaoComImg";
 import Header from "../../../Components/ComponentesDePagina/Header";
 import NavBar from "../../../Components/ComponentesDePagina/NavBar";
+import Alerts from "../../../Components/alerts";
 
 
 
@@ -25,9 +26,15 @@ export default function home(){
             nome === "" || nome === null || nome === undefined || 
             sobrenome === "" || sobrenome === null ||  sobrenome === undefined
         ){
-            alert("Por favor, Preencha todos os campos")
+            setAlertData({
+                visible: true,
+                mensagem: "Preencha corretamente todos os campos",
+                tipo: "erro"
+            });
             return
         }
+
+        
 
         //passando pela validação ele salva
     const nomeFormatado = formatarNome(nome);
@@ -36,6 +43,12 @@ export default function home(){
         await addDoc(collection(db, "pessoas"), {
         nome: nomeFormatado,
         sobrenome: sobrenomeFormatado
+        });
+
+        setAlertData({
+            visible: true,
+            mensagem: `Usuario ${nomeFormatado} ${sobrenomeFormatado} cadastrado com sucesso`,
+            tipo: "sucesso"
         });
     };
 
@@ -64,6 +77,12 @@ export default function home(){
     const [nome, setNome] = useState()
     const [sobrenome, setSobrenome] = useState()
 
+    const [alertData, setAlertData] = useState({
+    visible: false,
+    mensagem: "",
+    tipo: "sucesso"
+    });
+
     return(
 
         <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
@@ -91,6 +110,15 @@ export default function home(){
                 <NavBar/>
             
             </View> 
+
+            {/* ALERT */}
+            <Alerts 
+            visible={alertData.visible} 
+            hide={() => setAlertData({...alertData, visible: false})}
+            alerta={alertData.mensagem}
+            duration={1500}
+            type={alertData.tipo}
+            />
 
         </SafeAreaView>
     )

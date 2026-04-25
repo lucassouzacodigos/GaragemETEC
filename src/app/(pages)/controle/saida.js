@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity, View, Image, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../../Components/Styles";
 import Botao from "../../../Components/botao"
@@ -14,7 +14,8 @@ import BotaoComImg from "../../../Components/botaoComImg";
 import Header from "../../../Components/ComponentesDePagina/Header";
 import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 import RegistroBlock from "../../../Components/RegistroBlock";
-
+import Alerts from "../../../Components/alerts";
+import { Octicons } from "@expo/vector-icons";
 
 
 export default function Entrada(props){
@@ -25,6 +26,12 @@ export default function Entrada(props){
     const [nome, setNome] = useState()
     const [placa, setPlaca] = useState()   
     const [carrosDentro, setCarrosDentro] = useState([])
+
+    const [alertData, setAlertData] = useState({
+    visible: false,
+    mensagem: "",
+    tipo: "sucesso"
+    });
     
     const getCarrosDentroDaEtec = async () => {
             const q = query(collection(db, "movimentacoes"), where("saida", "==", null), orderBy("entrada", "desc"));
@@ -39,6 +46,7 @@ export default function Entrada(props){
     useEffect(() => {
         getCarrosDentroDaEtec()
     },[])
+
 
     
 
@@ -56,16 +64,32 @@ export default function Entrada(props){
                             <Text style={[css.TituloPagina, {}]}>Registrar saída da ETEC:</Text>
                         </View>
 
-                        <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
+                        {carrosDentro.length == 0 && <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
+                            <ItemBlock>
+                                <Text style={{fontSize:15, fontWeight:"bold", color:"black"}}>Sem carros estacionados no momento</Text>
+                                <Octicons name="blocked" size={50} color="black" />
+                            </ItemBlock>
+                        </ScrollView>}
+
+                        {carrosDentro.length > 0 && <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
                             <ItemBlock>
                                 {carrosDentro.map((carro) => (
                                     <RegistroBlock key={carro.id} carro={carro} refresh={getCarrosDentroDaEtec}/>
                                 ))}
                                 
                             </ItemBlock>
-                        </ScrollView>
+                        </ScrollView>}
 
                         <NavBar />
+
+                        {/* ALERT */}
+                        <Alerts 
+                        visible={alertData.visible} 
+                        hide={() => setAlertData({...alertData, visible: false})}
+                        alerta={alertData.mensagem}
+                        duration={1500}
+                        type={alertData.tipo}
+                        />
 
                     </View>
                 </SafeAreaView>

@@ -5,6 +5,15 @@
       "expo-router"
     ],
     "name": "GaragemEtec",
-    "slug": "GaragemEtec"
+    "slug": "GaragemEtec",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "740303db-ee74-4ec7-9da5-bb050960cf05"
+      }
+    },
+    "android": {
+      "package": "com.bragaxtv.GaragemEtec"
+    }
   }
 }

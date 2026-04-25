@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { ScrollView, Text, TextInput, TouchableOpacity, View, Image, Modal } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity, View, Image, Modal, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../Components/Styles"
 import { Ionicons } from "@expo/vector-icons";
@@ -8,14 +8,22 @@ import BotaoComImg from "./botaoComImg";
 import Botao from "./botao";
 import { addDoc, collection, Timestamp, getDocs, getDoc, query, where, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../Services/FirebaseParams";
-
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Alerts from "./alerts";
 
 
 
 export default function RegistroBlock({carro, refresh}){
 
+    const insets = useSafeAreaInsets()
     const [modalState, setModalState] = useState(false)
     const [confirmaSaida, setConfirmaSaida] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [alertData, setAlertData] = useState({
+    visible: false,
+    mensagem: "",
+    tipo: "sucesso"
+    });
 
 
     const horaEntrada = carro.entrada?.toDate()
@@ -24,17 +32,29 @@ export default function RegistroBlock({carro, refresh}){
 
     const requestSaida = () => {
         setConfirmaSaida(true)
-        console.log(carro.saida)
+        setAlertData({visible: false, mensagem: "teste", tipo: "sucesso"})
     }
 
     const darSaidaFirebase = async () => {
         await updateDoc(doc(db, "movimentacoes", carro.id), {
             saida: Timestamp.now()
         });
+
+        setAlertData({
+            visible: true,
+            mensagem: "Saída registrada com sucesso",
+            tipo: "sucesso"
+        });
         
-        setConfirmaSaida(false)
         setModalState(false)
-        refresh()
+        setConfirmaSaida(false)
+        setLoading(true)
+        
+        setTimeout(() => {
+            setLoading(false)
+            refresh()
+
+        }, 1500);
     }
 
 //     const deletarTudo = async () => {
@@ -56,6 +76,8 @@ export default function RegistroBlock({carro, refresh}){
     }
 
     return(
+
+
         <TouchableOpacity onPress={() => setModalState(!modalState)} style={css.RegistroBlock}>
 
             <Ionicons name="person" size={35} color="black" style={{position:"absolute", left:5}}/>
@@ -65,7 +87,8 @@ export default function RegistroBlock({carro, refresh}){
                 <Text style={css.bold}>Nome: </Text>
                 <Text numberOfLines={1} adjustsFontSizeToFit style={{fontWeight:"bold", width:"50%"}}>{carro.nome}</Text>
                 <Text style={css.bold}>Status: </Text>
-                <Text style={[css.bola, {backgroundColor: carro.status == null ? "green" : "red"}]} > </Text>
+                {!loading && <Text style={[css.bola, {backgroundColor: carro.status == null ? "green" : "red"}]} > </Text>}
+                {loading && <ActivityIndicator size="small" color="black" />}
             </View>
 
             {/* Linha de baixo */}
@@ -81,11 +104,23 @@ export default function RegistroBlock({carro, refresh}){
                 </TouchableOpacity>
             }
 
-            <Modal visible={confirmaSaida} animationType="fade" transparent >
+            <Modal visible={confirmaSaida} animationType="fade" transparent statusBarTranslucent>
                 {/* Wrapper */}
-                <View style={{width:"100%", height:"100%", backgroundColor: "rgba(0,0,0,0.9)", alignItems:"center", justifyContent:"center", borderRadius:10}}>
+                <TouchableOpacity onPress={() => setConfirmaSaida(false)} style={{flex:1, 
+                alignItems:"center",
+                backgroundColor:"rgba(0, 0, 0, 0.3)", 
+                justifyContent:"center", 
+                borderRadius:10,}}>
                     {/* Conteúdo */}
-                    <View style={{width:"80%", height:"auto", backgroundColor:"white", alignItems:"center", justifyContent:"center", borderRadius:10}}>
+                    <View style={{width:"80%", 
+                        height:"auto", 
+                        backgroundColor:"rgba(255, 255, 255, 1)", 
+                        alignItems:"center", 
+                        justifyContent:"center", 
+                        borderRadius:10,
+                        borderWidth:2,
+                        borderColor:"black",
+                        borderStyle:"solid",}}>
                         <TouchableOpacity onPress={() => setConfirmaSaida(false)}>
                             <Text style={{fontWeight:"bold", fontSize:30, textAlign:"center"}}>ATENÇÃO !</Text>
                             <Ionicons name="warning" size={30} color={"red"} style={{position:"absolute", right:"5%", top:"5%"}}></Ionicons>
@@ -93,14 +128,23 @@ export default function RegistroBlock({carro, refresh}){
                             <Text style={{fontWeight:"bold", fontSize:20, textAlign:"center"}}>Voce Tem Certeza Que o Veiculo com a Placa: "{carro.placa}" Saiu Desse local?</Text>
 
                             <View style={{width:"100%", flexDirection:"row", justifyContent:"space-around"}}>
-                                <Botao text="Sim" cor="green" acao={darSaidaFirebase} largura={"45%"} ></Botao>
-                                <Botao text="Não" cor="red" acao={() => {setConfirmaSaida(false)}} largura={"45%"} ></Botao>
+                                <Botao fontSize={25} fontcolor="white" text="Sim" cor="green" acao={darSaidaFirebase} largura={"45%"} altura={50} ></Botao>
+                                <Botao fontSize={25} fontcolor="white" text="Não" cor="red" acao={() => {setConfirmaSaida(false)}} largura={"45%"} altura={50} ></Botao>
                             </View>
                         </TouchableOpacity>
                     </View>
                     
-                </View>
+
+                </TouchableOpacity>
             </Modal>
+                    {/* ALERT */}
+                    <Alerts 
+                    visible={alertData.visible} 
+                    hide={() => setAlertData({...alertData, visible: false})}
+                    alerta={alertData.mensagem}
+                    duration={1500}
+                    type={alertData.tipo}
+                    />
         </TouchableOpacity>
     )
 }

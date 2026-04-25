@@ -15,6 +15,8 @@ import Header from "../../../Components/ComponentesDePagina/Header";
 import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
+import Alerts from "../../../Components/alerts";
 
 
 
@@ -28,6 +30,13 @@ export default function Entrada(props){
     const [modalState, setModalState] = useState(false)
     const [usuarios, setUsuarios] = useState([])
     const [carros, setCarros] = useState([])
+
+    const [alertData, setAlertData] = useState({
+    visible: false,
+    mensagem: "",
+    tipo: "sucesso"
+    });
+
 
     useEffect(() => {
         async function getUsers(){
@@ -61,10 +70,7 @@ export default function Entrada(props){
     
 
     const pesquisar = () => {
-
         setModalState(true)
-
-
     }
 
     const selecionarPessoa = async (pessoa) => {
@@ -90,17 +96,27 @@ export default function Entrada(props){
             nome == null || nome == "" || nome == undefined ||
             placa == null || placa == "" || placa == undefined
         ){
-            alert("Preencha corretamente todos os campos")
+            setAlertData({
+                visible: true,
+                mensagem: "Preencha todos os campos",
+                tipo: "erro"
+            });
             return
         }
 
         await addDoc(collection(db, "movimentacoes"), {
             usuarioID: idSelected,
             nome: nome,
-            placa: carros[0].placa,
+            placa: placa,
             entrada: Timestamp.now(),
             saida: null,
             visitante:false
+            });
+
+            setAlertData({
+                visible: true,
+                mensagem: "Entrada registrada com sucesso",
+                tipo: "sucesso"
             });
     };
 
@@ -110,7 +126,11 @@ export default function Entrada(props){
             nome == null || nome == "" || nome == undefined ||
             placa == null || placa == "" || placa == undefined
         ){
-            alert("Preencha corretamente todos os campos")
+            setAlertData({
+                visible: true,
+                mensagem: "Preencha todos os campos",
+                tipo: "erro"
+            });
             return
         }
 
@@ -122,6 +142,12 @@ export default function Entrada(props){
             entrada: Timestamp.now(),
             saida: null,
             visitante: true
+            });
+
+            setAlertData({
+                visible: true,
+                mensagem: "Entrada registrada com sucesso",
+                tipo: "sucesso"
             });
     };
     
@@ -142,6 +168,8 @@ export default function Entrada(props){
                         <View style={{ width:"100%", paddingHorizontal:"8%"}}>
                             <Text style={[css.TituloPagina, {}]}>Registrar entrada na ETEC:</Text>
                         </View>
+
+
 
 
 
@@ -195,6 +223,16 @@ export default function Entrada(props){
                         <NavBar />
 
                     </View>
+
+                    {/* ALERT */}
+                    <Alerts 
+                    visible={alertData.visible} 
+                    hide={() => setAlertData({...alertData, visible: false})}
+                    alerta={alertData.mensagem}
+                    duration={1500}
+                    type={alertData.tipo}
+                    />
+
                 </SafeAreaView>
     )
 }

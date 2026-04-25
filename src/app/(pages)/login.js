@@ -51,6 +51,7 @@ export default function login(){
                 <Botao text="home" largura="250" acao={() => router.push("/home")} cor="red" />
                 <Botao text="entrada" largura="250" acao={() => router.push("/controle/entrada")} cor="lightblue" />
                 <Botao text="saida" largura="250" acao={() => router.push("/controle/saida")} cor="orange" />
+                <Botao text="true login" largura="250" acao={() => router.push("/definirEscola")} cor="blue" />
 
                 <Text>Usuario: {user}</Text>
                 <Text>Senha: {senha}</Text>
