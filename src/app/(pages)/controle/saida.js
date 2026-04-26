@@ -66,15 +66,15 @@ export default function Entrada(props){
 
                         {carrosDentro.length == 0 && <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
                             <ItemBlock>
-                                <Text style={{fontSize:15, fontWeight:"bold", color:"black"}}>Sem carros estacionados no momento</Text>
-                                <Octicons name="blocked" size={50} color="black" />
+                                <Text style={{fontSize:15, fontWeight:"bold", color:"black", marginTop:15}}>Sem carros estacionados no momento</Text>
+                                <Octicons name="blocked" size={50} color="black" style={{margin:15}} />
                             </ItemBlock>
                         </ScrollView>}
 
                         {carrosDentro.length > 0 && <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
                             <ItemBlock>
                                 {carrosDentro.map((carro) => (
-                                    <RegistroBlock key={carro.id} carro={carro} refresh={getCarrosDentroDaEtec}/>
+                                    <RegistroBlock expandable={true} key={carro.id} carro={carro} refresh={getCarrosDentroDaEtec}/>
                                 ))}
                                 
                             </ItemBlock>

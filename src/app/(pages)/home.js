@@ -3,20 +3,72 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from "reac
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../Components/Styles";
 import Botao from "../../Components/botao";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ItemBlock from "../../Components/itemBlock"
 import { db } from "../../Services/FirebaseParams";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, query, where, limit, orderBy } from "firebase/firestore";
 import carroLogo from '../../assets/carroLogo.png'
 import InputNomeado from "../../Components/inputNomeado";
 import marcas from '../../Listas/marcas'
 import BotaoComImg from "../../Components/botaoComImg";
 import Header from "../../Components/ComponentesDePagina/Header";
 import NavBar from "../../Components/ComponentesDePagina/NavBar";
-
+import RegistroBlock from "../../Components/RegistroBlock";
+import RegistroBlockSaida from "../../Components/RegistroBlockSaida";
 
 export default function Registros(){
 
+
+    const [todosRegistros, setTodosRegistros] = useState([])
+
+    const getTodosRegistros = async () => {
+        const q = query(
+            collection(db, "movimentacoes"),
+            orderBy("entrada", "desc"),
+            limit(5)
+        );
+
+        const querySnapshot = await getDocs(q);
+
+        const registros = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+
+        const listaExpandida = registros.flatMap(item => {
+            const eventos = [];
+
+            eventos.push({
+                id: item.id + "_entrada",
+                tipo: "entrada",
+                data: item.entrada,
+                nome: item.nome,
+                placa: item.placa
+            });
+
+            if (item.saida) {
+                eventos.push({
+                    id: item.id + "_saida",
+                    tipo: "saida",
+                    data: item.saida,
+                    nome: item.nome,
+                    placa: item.placa
+                });
+            }
+
+            return eventos;
+        });
+
+        listaExpandida.sort((a, b) => {
+            return b.data.toMillis() - a.data.toMillis();
+        });
+
+        setTodosRegistros(listaExpandida);
+    };
+
+    useEffect(() => {
+        getTodosRegistros()
+    }, [])
 
     return(
         <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
@@ -36,12 +88,16 @@ export default function Registros(){
                         <BotaoComImg largura={"45%"} />
                     </View>
 
+                    <View style={{ width:"100%", paddingHorizontal:"8%"}}>
+                            <Text style={[css.TituloPagina, {}]}>Ultimas movimentações</Text>
+                    </View>
+
                     <ItemBlock>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
-                        <Text>aids</Text>
+                    {todosRegistros.map(item => {
+                        return(
+                            <RegistroBlockSaida key={item.id} carro={item} refresh={getTodosRegistros} expandable={false}/>
+                        )
+                    })}
                     </ItemBlock>
 
 

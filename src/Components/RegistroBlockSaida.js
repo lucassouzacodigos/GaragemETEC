@@ -13,7 +13,7 @@ import Alerts from "./alerts";
 
 
 
-export default function RegistroBlock({carro, refresh, expandable}){
+export default function RegistroBlockSaida({carro, refresh, expandable}){
 
     const insets = useSafeAreaInsets()
     const [modalState, setModalState] = useState(false)
@@ -25,10 +25,13 @@ export default function RegistroBlock({carro, refresh, expandable}){
     tipo: "sucesso"
     });
 
+    const horaSaida = carro.saida?.toDatea()
+    const horaSaidaConvertida = horaSaida?.getHours().toString().padStart(2, "0") +
+    ":" + horaSaida?.getMinutes().toString().padStart(2, "0")
 
-    const horaEntrada = carro.entrada?.toDate()
-    const horaConvertida = horaEntrada.getHours().toString().padStart(2, "0") + 
-    ":" + horaEntrada.getMinutes().toString().padStart(2, "0")
+    const horaEntrada = carro.data?.toDate()
+    const horaEntradaConvertida = horaEntrada?.getHours().toString().padStart(2, "0") + 
+    ":" + horaEntrada?.getMinutes().toString().padStart(2, "0")
 
     const requestSaida = () => {
         setConfirmaSaida(true)
@@ -80,30 +83,37 @@ export default function RegistroBlock({carro, refresh, expandable}){
 
         <TouchableOpacity onPress={expandable? () => setModalState(!modalState) : null} style={css.RegistroBlock}>
 
-            <Ionicons name="person" size={35} color="black" style={{position:"absolute", left:5}}/>
+
+            {/* iconezinho de user */}
+            <Ionicons name="car" size={32} color={"black"} style={{position:"absolute", left:5, backgroundColor: carro.tipo == "entrada" ? "rgba(40, 238, 0, 0.5)" : "rgba(255, 30, 30, 0.5)", borderRadius:50, padding:2}}/>
 
             {/* linha de cima */}
             <View style={{width:"100%", flexDirection:"row", justifyContent:"flex-start", backgroundColor:"transparent", alignItems:"center"}}>
                 <Text style={css.bold}>Nome: </Text>
                 <Text numberOfLines={1} adjustsFontSizeToFit style={{fontWeight:"bold", width:"50%"}}>{carro.nome}</Text>
-                <Text style={css.bold}>Status: </Text>
-                {!loading && <Text style={[css.bola, {backgroundColor: carro.status == null ? "green" : "red"}]} > </Text>}
-                {loading && <ActivityIndicator size="small" color="black" />}
+                <View style={{backgroundColor:"transparent", flexDirection:"row", width:75, justifyContent:"flex-end", alignItems:"center"}}>
+                <Text style={[css.bold, {}]}>{carro.tipo == "entrada" ? "Entrada" : "Saida"} </Text>
+                <Text style={[css.bola, {backgroundColor: carro.tipo == "entrada" ? "green" : "red"}]} > </Text>
+                </View>
             </View>
 
             {/* Linha de baixo */}
             <View style={{width:"100%", flexDirection:"row", justifyContent:"space-between", backgroundColor:"transparent"}}>
                 <Text style={css.bold}>Placa:  {carro.placa}</Text>
-                <Text>{horaConvertida}</Text>
+                <Text style={[css.bold, {marginRight:11}]}>{horaEntradaConvertida}</Text>
             </View>
                 
 
+            {/* Botao gigante vermelho de pedir a saida */}
             {modalState && 
                 <TouchableOpacity onPress={requestSaida} style={{backgroundColor:"red", height:50, width:"100%", borderRadius:200, margin:10, alignItems:"center", justifyContent:"center", elevation:5 }}>
                     <Text adjustsFontSizeToFit  numberOfLines={1} style={{color:"white", fontSize:15, fontWeight:"bold"}}>Dar Saida do estacionamento</Text>
                 </TouchableOpacity>
             }
 
+
+
+            {/* Confirmação de saída */}
             <Modal visible={confirmaSaida} animationType="fade" transparent statusBarTranslucent>
                 {/* Wrapper */}
                 <TouchableOpacity onPress={() => setConfirmaSaida(false)} style={{flex:1, 
