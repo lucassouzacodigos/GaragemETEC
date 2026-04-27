@@ -15,6 +15,7 @@ import SelectPessoa from "../../../Components/SelectPessoa";
 import Header from "../../../Components/ComponentesDePagina/Header";
 import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 import Alerts from "../../../Components/alerts";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function home(){
@@ -36,9 +37,12 @@ export default function home(){
     }
 
 
-    const salvar = () => {
+    const salvar = async () => {
         //validaçao dos dados antes de salvar, se algum campo nao estiver preenchido, nao salva
+        const escola = await AsyncStorage.getItem('escola')
+
         if (
+            escola == null || escola == undefined || escola == '' ||
             placa == null || placa == undefined || placa == '' ||
             modelo == null || modelo == undefined || modelo == '' ||
             cor == null || cor == undefined || cor == '' ||
@@ -46,7 +50,7 @@ export default function home(){
         ){
             setAlertData({
                 visible: true,
-                mensagem: "Preencha todos os campos",
+                mensagem: "Erro ao cadastrar carro",
                 tipo: "erro"
             });
             return
@@ -57,7 +61,8 @@ export default function home(){
             placa: placa,
             modelo: modelo,
             cor: cor,
-            usuarioID: usuarioID
+            usuarioID: usuarioID,
+            escola: escola
         })
 
         setAlertData({

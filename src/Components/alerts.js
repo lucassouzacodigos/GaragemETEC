@@ -31,6 +31,7 @@ export default function Alerts(props){
     const style = {
         padding:15,
         width:"90%",
+        minWidth:300,
         height:150,
         backgroundColor:"rgba(255,255,255,1)",
         borderRadius:10,

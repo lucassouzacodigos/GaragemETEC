@@ -10,7 +10,7 @@ export default function BotaoComImg(props){
 
 
     return(
-        <TouchableOpacity onPress={props.acao} style={[css.botaComImg, {width: props.largura, margin:5, justifyContent:"center"}]}>
+        <TouchableOpacity onPress={props.acao} style={[css.botaComImg, {width: props.largura, margin:5, justifyContent:"center", borderRadius: props.borderRadius}]}>
             {/* <Image source={props.img} style={{height:35, width:35, justifyContent:"center", margin:5}}></Image> */}
             <Ionicons name={props.img} size={props.size} color="white" style={{margin:5}}/>
             <Text style={{color:"white", fontSize:20}}>{props.text}</Text>

@@ -14,6 +14,7 @@ import BotaoComImg from "../../../Components/botaoComImg";
 import Header from "../../../Components/ComponentesDePagina/Header";
 import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 import Alerts from "../../../Components/alerts";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -22,7 +23,10 @@ export default function home(){
 
     const salvarPessoa = async () => {
         //Validaçoes para salvar o nome no banco do firebase
+        const escola = await AsyncStorage.getItem('escola')
+
         if(
+            escola === "" || escola === null || escola === undefined ||
             nome === "" || nome === null || nome === undefined || 
             sobrenome === "" || sobrenome === null ||  sobrenome === undefined
         ){
@@ -42,7 +46,8 @@ export default function home(){
 
         await addDoc(collection(db, "pessoas"), {
         nome: nomeFormatado,
-        sobrenome: sobrenomeFormatado
+        sobrenome: sobrenomeFormatado,
+        escola: escola
         });
 
         setAlertData({

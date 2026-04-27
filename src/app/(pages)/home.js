@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from "react-native";
+import { ScrollView, Text, TextInput, TouchableOpacity, View, Image, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../Components/Styles";
 import Botao from "../../Components/botao";
@@ -15,9 +15,10 @@ import Header from "../../Components/ComponentesDePagina/Header";
 import NavBar from "../../Components/ComponentesDePagina/NavBar";
 import RegistroBlock from "../../Components/RegistroBlock";
 import RegistroBlockSaida from "../../Components/RegistroBlockSaida";
+import Alerts from "../../Components/alerts";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Registros(){
-
 
     const [todosRegistros, setTodosRegistros] = useState([])
 
@@ -70,6 +71,11 @@ export default function Registros(){
         getTodosRegistros()
     }, [])
 
+    async function getEscola(){
+        const escola = await AsyncStorage.getItem('escola')
+        return escola
+    }
+
     return(
         <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
             <Stack.Screen options={{headerShown: false}} />
@@ -80,7 +86,6 @@ export default function Registros(){
                 
                 <ScrollView style={css.mainScroll} contentContainerStyle={css.mainScrollContent}>
 
-                    <Text>asd</Text>
 
                     <View style={[css.botoesRegistro, {backgroundColor:"lightblue"}]}>
                         <BotaoComImg largura={"93%"} />
@@ -91,6 +96,12 @@ export default function Registros(){
                     <View style={{ width:"100%", paddingHorizontal:"8%"}}>
                             <Text style={[css.TituloPagina, {}]}>Ultimas movimentações</Text>
                     </View>
+
+                    {todosRegistros.length == 0 && 
+                        <View>
+                            <ActivityIndicator size="large" color={css.AzulPrincipal} style={{ transform: [{ scale: 1.5 }] }} />   
+                        </View>
+                    }
 
                     <ItemBlock>
                     {todosRegistros.map(item => {
@@ -104,6 +115,8 @@ export default function Registros(){
                 </ScrollView>
 
                 <NavBar/>
+
+
             </View>
         </SafeAreaView>
     )

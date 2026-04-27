@@ -17,6 +17,7 @@ import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
 import Alerts from "../../../Components/alerts";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -92,9 +93,12 @@ export default function Entrada(props){
     }
 
     const registrarEntrada = async () => {
+        const escola = await AsyncStorage.getItem('escola')
+
         if (
             nome == null || nome == "" || nome == undefined ||
-            placa == null || placa == "" || placa == undefined
+            placa == null || placa == "" || placa == undefined ||
+            escola == null || escola == "" || escola == undefined
         ){
             setAlertData({
                 visible: true,
@@ -104,20 +108,23 @@ export default function Entrada(props){
             return
         }
 
-        await addDoc(collection(db, "movimentacoes"), {
-            usuarioID: idSelected,
-            nome: nome,
-            placa: placa,
-            entrada: Timestamp.now(),
-            saida: null,
-            visitante:false
-            });
 
-            setAlertData({
-                visible: true,
-                mensagem: "Entrada registrada com sucesso",
-                tipo: "sucesso"
-            });
+        await addDoc(collection(db, "movimentacoes"), {
+        usuarioID: idSelected,
+        nome: nome,
+        placa: placa,
+        entrada: Timestamp.now(),
+        saida: null,
+        visitante:false,
+        escola: escola
+        });
+
+        setAlertData({
+            visible: true,
+            mensagem: "Entrada registrada com sucesso",
+            tipo: "sucesso"
+        })
+        
     };
 
 

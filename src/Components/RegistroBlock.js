@@ -86,15 +86,17 @@ export default function RegistroBlock({carro, refresh, expandable}){
             <View style={{width:"100%", flexDirection:"row", justifyContent:"flex-start", backgroundColor:"transparent", alignItems:"center"}}>
                 <Text style={css.bold}>Nome: </Text>
                 <Text numberOfLines={1} adjustsFontSizeToFit style={{fontWeight:"bold", width:"50%"}}>{carro.nome}</Text>
+                <View style={{backgroundColor:"transparent", flexDirection:"row", width:75, justifyContent:"flex-end", alignItems:"center"}}>
                 <Text style={css.bold}>Status: </Text>
                 {!loading && <Text style={[css.bola, {backgroundColor: carro.status == null ? "green" : "red"}]} > </Text>}
                 {loading && <ActivityIndicator size="small" color="black" />}
+                </View>
             </View>
 
             {/* Linha de baixo */}
             <View style={{width:"100%", flexDirection:"row", justifyContent:"space-between", backgroundColor:"transparent"}}>
                 <Text style={css.bold}>Placa:  {carro.placa}</Text>
-                <Text>{horaConvertida}</Text>
+                <Text style={[css.bold, {marginRight:11}]}>{horaConvertida}</Text>
             </View>
                 
 
