@@ -16,6 +16,7 @@ import NavBar from "../../../Components/ComponentesDePagina/NavBar";
 import RegistroBlock from "../../../Components/RegistroBlock";
 import Alerts from "../../../Components/alerts";
 import { Octicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function Entrada(props){
@@ -34,7 +35,9 @@ export default function Entrada(props){
     });
     
     const getCarrosDentroDaEtec = async () => {
-            const q = query(collection(db, "movimentacoes"), where("saida", "==", null), orderBy("entrada", "desc"));
+            const escola = await AsyncStorage.getItem('escola')
+
+            const q = query(collection(db, "movimentacoes"), where("saida", "==", null), where("escola", "==", escola), orderBy("entrada", "desc"));
             const querySnapshot = await getDocs(q);
             const carrosDentro = querySnapshot.docs.map(doc => ({
                 id: doc.id,

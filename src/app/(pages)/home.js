@@ -23,8 +23,10 @@ export default function Registros(){
     const [todosRegistros, setTodosRegistros] = useState([])
 
     const getTodosRegistros = async () => {
+        const escola = await getEscola();
         const q = query(
             collection(db, "movimentacoes"),
+            where("escola", "==", escola),
             orderBy("entrada", "desc"),
             limit(5)
         );
