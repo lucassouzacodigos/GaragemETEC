@@ -169,4 +169,14 @@ export const css = StyleSheet.create({
         borderRadius:500, 
         backgroundColor:"orange"
     },
+    conteudoPesquisa:{
+        borderRadius:5,
+        backgroundColor:"lightblue",
+        width:"100%",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:"flex-start",
+        flexWrap:"wrap"
+
+    }
 })

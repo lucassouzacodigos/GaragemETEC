@@ -30,7 +30,10 @@ export default function Entrada(props){
     const [placa, setPlaca] = useState()   
     const [modalState, setModalState] = useState(false)
     const [usuarios, setUsuarios] = useState([])
+    const [usuariosOriginais, setUsuariosOriginais] = useState([])
     const [carros, setCarros] = useState([])
+    const [escola, setEscola] = useState('')
+    const [pesquisa, setPesquisa] = useState('')
 
     const [alertData, setAlertData] = useState({
     visible: false,
@@ -38,17 +41,25 @@ export default function Entrada(props){
     tipo: "sucesso"
     });
 
+    async function getUsers(){
+        const snapshot = await getDocs(collection(db, "pessoas"));
+        
+        const usuarios = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+            }));
+        setUsuariosOriginais(usuarios)
+        setUsuarios(usuarios)
+    }
+
 
     useEffect(() => {
-        async function getUsers(){
-            const snapshot = await getDocs(collection(db, "pessoas"));
-            
-            const usuarios = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-                }));
-            setUsuarios(usuarios)
+        async function getEscola(){
+            const escola = await AsyncStorage.getItem('escola')
+            setEscola(escola)
         }
+        getEscola()
+        
         async function getCarros(){
             const snapshot = await getDocs(collection(db, "carros"));
             
@@ -68,7 +79,28 @@ export default function Entrada(props){
         setIdSelected(null)
     }
 
-    
+
+
+    useEffect(() => {
+        // se pesquisa estiver vazia
+        if (pesquisa.trim() === '') {
+            setUsuarios(usuariosOriginais)
+            return
+        }
+
+        const filtrados = usuariosOriginais.filter((item) => {
+
+            const nomeCompleto =
+                `${item.nome} ${item.sobrenome}`.toLowerCase()
+
+            return nomeCompleto.includes(
+                pesquisa.toLowerCase()
+            )
+        })
+
+        setUsuarios(filtrados)
+
+    }, [pesquisa])
 
     const pesquisar = () => {
         setModalState(true)
@@ -87,7 +119,7 @@ export default function Entrada(props){
             }));
         setCarros(carros)
 
-        if (carros.length == 1){
+        if (carros.length > 0){
             setPlaca(carros[0].placa)
         }
     }
@@ -169,13 +201,13 @@ export default function Entrada(props){
         
                         <Header />
 
-                        <Text>{idSelected}</Text>
+                        {/* <Text>{idSelected}</Text>
                         <Text>{nome}</Text>
+                        <Text>{pesquisa}</Text> */}
 
                         <View style={{ width:"100%", paddingHorizontal:"8%"}}>
-                            <Text style={[css.TituloPagina, {}]}>Registrar entrada na ETEC:</Text>
+                            <Text style={[css.TituloPagina, {}]}>Registrar entrada de veiculo:</Text>
                         </View>
-
 
 
 
@@ -183,17 +215,23 @@ export default function Entrada(props){
                         
                         {/* pesquisa */}
                         {modalState && 
-                            <ScrollView style={[css.mainScroll, {backgroundColor:"pink"}]}>
-                                <Text>Pesquisa de usuario</Text>
+                            <ScrollView style={[css.mainScroll, {backgroundColor:css.AzulPrincipal}]} contentContainerStyle={css.mainScrollContent}>
+                                
+                                {/* input pesquisa */}
+                                <InputNomeado onChangeText={setPesquisa} titulo="Pesquisa:" conectivo={"a"} largura={"50%"}/> 
+                                
+
                                 <TouchableOpacity onPress={() =>setModalState(false)}>
                                     <Text>fechar</Text>
-
                                 </TouchableOpacity>
                                 
                                 {usuarios.map((item) => (
-                                    <TouchableOpacity key={item.id} onPress={() => selecionarPessoa(item)} style={{flexDirection:"row", margin:10, backgroundColor:"white"}}>
-                                        <Text style={{marginRight:5}}>{item.nome}</Text>
-                                        <Text>{item.sobrenome}</Text>
+                                    <TouchableOpacity key={item.id} onPress={() => selecionarPessoa(item)} style={{flexDirection:"row", margin:10, backgroundColor:"white", borderRadius:10}}>
+                                        <View style={css.conteudoPesquisa}>
+                                            <Ionicons name="person-circle-outline" size={50} color="black" style={{margin:5}}/>
+                                            <Text style={[css.bold,{marginRight:5}]}>{item.nome}</Text>
+                                            <Text style={[css.bold]}>{item.sobrenome} </Text>
+                                        </View>
                                     </TouchableOpacity>
                                 ))}
 

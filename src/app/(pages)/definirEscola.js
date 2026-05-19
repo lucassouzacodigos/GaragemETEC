@@ -73,7 +73,7 @@ export default function definirEscola(props){
         if (login) {
             //DEFINE NA MEMORIA INTERNA DO CELULAR A ESCOLA SELECIONADA
             AsyncStorage.setItem("escola", snapshot.docs[0].data().name)
-            setAlertData({visible: true, mensagem: `Escola definida com sucesso: ${name}`, tipo: "sucesso"})
+            setAlertData({visible: true, mensagem: `Logado em: ${name}`, tipo: "sucesso"})
             setTimeout(() => {
                 setCarregando(false)
                 router.replace("/home")
