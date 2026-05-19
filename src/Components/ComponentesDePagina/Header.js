@@ -3,6 +3,7 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from "reac
 import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from '@expo/vector-icons/Ionicons'
 import { css } from "../Styles";
+import { SimpleLineIcons } from "@expo/vector-icons";
 
 
 

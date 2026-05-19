@@ -15,14 +15,7 @@ import carroLogo from '../../../assets/carroLogo.png'
 
 export default function home(){
 
-    const cadastrar = () => {
-        addDoc(collection(db, "carros"), {
-            marca: marca,
-            modelo: modelo,
-            cor: cor
-        })
-    } 
-        
+
 
     const router = useRouter()
 
@@ -40,6 +33,8 @@ export default function home(){
                 
                 <View style={[css.FlexCenter, {backgroundColor:"#225AF4", height:"100%", width:"100%", flexDirection:"column", alignItems:"center"}]}>
 
+
+                    {/* LOGO */}
                     <View style={{backgroundColor:"transparent", width:"90%"}}>
                         <Text style={css.logoText1}>Garagem</Text>
 
@@ -48,6 +43,7 @@ export default function home(){
                             <Text style={css.logoText2}>ETEC</Text>
                         </View>
                     </View>
+                    {/* LOGO */}
 
 
                 </View>

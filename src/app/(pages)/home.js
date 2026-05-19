@@ -1,4 +1,4 @@
-import { Stack, useRouter } from "expo-router";
+import { router, Stack, useRouter } from "expo-router";
 import { ScrollView, Text, TextInput, TouchableOpacity, View, Image, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../Components/Styles";
@@ -21,6 +21,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Registros(){
 
     const [todosRegistros, setTodosRegistros] = useState([])
+    const [alertData, setAlertData] = useState({visible: false, mensagem: "", tipo: "sucesso"})
 
     const getTodosRegistros = async () => {
         const escola = await getEscola();
@@ -78,6 +79,14 @@ export default function Registros(){
         return escola
     }
 
+    async function logout(){
+        await AsyncStorage.removeItem('escola')
+        setAlertData({visible: true, mensagem: "Deslogado com sucesso", tipo: "sucesso"})
+        setTimeout(() => {
+            router.push("/definirEscola")
+        }, 1500);
+    }
+
     return(
         <SafeAreaView style={[css.safeArea, css.FlexCenter]} edges={["right"]}>
             <Stack.Screen options={{headerShown: false}} />
@@ -113,6 +122,17 @@ export default function Registros(){
                     })}
                     </ItemBlock>
 
+                    {/* Sair */}
+                    <ItemBlock>
+                        <View style={css.sair}>
+                            <TouchableOpacity onPress={() => logout()}>
+                                <Text style={{fontWeight:"bold", fontSize:20, color:"white"}}>Sair</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </ItemBlock>
+
+                    
+
 
                 </ScrollView>
 
@@ -120,6 +140,14 @@ export default function Registros(){
 
 
             </View>
+
+            <Alerts 
+                visible={alertData.visible} 
+                hide={() => setAlertData({...alertData, visible: false})}
+                alerta={alertData.mensagem}
+                duration={1600}
+                type={alertData.tipo}
+                />
         </SafeAreaView>
     )
 }

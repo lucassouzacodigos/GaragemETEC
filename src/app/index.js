@@ -9,7 +9,7 @@ export default function IndexPage(){
     useEffect(() => {
         const timer = setTimeout(() => {
             setGo(true)
-        }, 500)
+        }, 1500)
 
         return () => clearTimeout(timer)
     }, [])

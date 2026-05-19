@@ -15,6 +15,7 @@ import { MaterialCommunityIcons as Icones, AntDesign as AntIcons } from "@expo/v
 import Alerts from "../../Components/alerts";
 import { ActivityIndicator } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import carroLogo from '../../assets/carroLogo.png'
 
 
 
@@ -78,8 +79,13 @@ export default function definirEscola(props){
                 router.replace("/home")
             }, 1500);
             
-        } else {
+        } 
+        //Caso a escola existe, mas a senha esta errada, entra aqui
+        else {
             setAlertData({visible: true, mensagem: "Dados incorretos", tipo: "erro"})
+            setTimeout(() => {
+                setCarregando(false)
+            }, 1500);
         }
 
     }
@@ -90,8 +96,18 @@ export default function definirEscola(props){
                     <Stack.Screen options={{headerShown: false}} />
         
                     
-                    <View style={[css.quadrado, css.FlexCenter, {justifyContent:"start", backgroundColor:"#225AF4", alignItems:"center", justifyContent:"center"}]} >
+                    <View style={[css.quadrado, css.FlexCenter, {backgroundColor:"#225AF4", alignItems:"center", justifyContent:"flex-start", paddingTop:"20%"}]} >
                         
+                        {/* LOGO */}
+                        <View style={{backgroundColor:"transparent", width:"90%", marginBottom:"15%"}}>
+                            <Text style={css.logoText1}>Garagem</Text>
+    
+                            <View style={{flexDirection:"row", alignItems:"flex-end", justifyContent:"center", width:"100%"}}>
+                                <Image  source={carroLogo} style={{width:120, height:120}} />
+                                <Text style={css.logoText2}>ETEC</Text>
+                            </View>
+                        </View>
+
                         <InputNomeado tituloCor={"white"} tituloSize={20} titulo="Codigo/Nome da instituição:" onChangeText={setEscola} value={escola} conectivo="a" />
                         <InputNomeado secureTextEntry tituloCor={"white"} tituloSize={20} titulo="Senha de acesso:" onChangeText={setSenha} value={senha} conectivo="a" />
 
@@ -99,6 +115,7 @@ export default function definirEscola(props){
                         {!carregando && 
                             <BotaoComImg acao={handleLogin} borderRadius={7} img={"log-in"} size={35} text={"Entrar"} largura={200} />
                         }
+
 
                         {carregando &&
                             <ActivityIndicator size="large" color="white" style={{margin:10, transform: [{scale: 1.5}]}} /> 
@@ -113,7 +130,7 @@ export default function definirEscola(props){
                     visible={alertData.visible} 
                     hide={() => setAlertData({...alertData, visible: false})}
                     alerta={alertData.mensagem}
-                    duration={1500}
+                    duration={1600}
                     type={alertData.tipo}
                     />
                 </SafeAreaView>

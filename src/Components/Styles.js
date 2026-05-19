@@ -143,6 +143,15 @@ export const css = StyleSheet.create({
         justifyContent:"center",
         flexWrap:"wrap",
     },
+    sair:{
+        alignItems:"center",
+        justifyContent:"center",
+        width:"100%",
+        height: 45,
+        borderRadius:5,
+        backgroundColor: "#E53935",
+        borderWidth: 3,
+    },
     RegistroBlock:{
         paddingLeft:"15%",
         width:"90%", 
