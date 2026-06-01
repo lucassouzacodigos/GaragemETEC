@@ -3,7 +3,7 @@ import { ScrollView, Text, TextInput, TouchableOpacity, View, Image } from "reac
 import { SafeAreaView } from "react-native-safe-area-context";
 import { css } from "../../Components/Styles";
 import Botao from "../../Components/botao";
-import { Activity, useState } from "react";
+import { Activity, useEffect, useState } from "react";
 import ItemBlock from "../../Components/itemBlock"
 import { db } from "../../Services/FirebaseParams";
 import { collection, addDoc, getDoc, collectionGroup, getDocs, query, where, or } from "firebase/firestore";
@@ -21,11 +21,29 @@ import carroLogo from '../../assets/carroLogo.png'
 
 export default function definirEscola(props){
 
+
+
     const router = useRouter()
     const [escola, setEscola] = useState('');
     const [senha, setSenha] = useState('')
     const [carregando, setCarregando] = useState(false)
     const [alertData, setAlertData] = useState({visible: false, mensagem: "", tipo: "sucesso"})
+
+    const testarSeJaLogado = async () => {
+        const escola = await AsyncStorage.getItem("escola")
+        if (escola != null) {
+            setAlertData({visible: true, mensagem: "Carregando dados", tipo: "sucesso"})
+            setTimeout(() => {
+                setCarregando(false)
+                router.replace("/home")
+            }, 1500);
+        }
+    }
+
+    useEffect(() => {
+        testarSeJaLogado()
+    }, [])
+
 
 
     const handleLogin = async () => {
@@ -104,7 +122,7 @@ export default function definirEscola(props){
     
                             <View style={{flexDirection:"row", alignItems:"flex-end", justifyContent:"center", width:"100%"}}>
                                 <Image  source={carroLogo} style={{width:120, height:120}} />
-                                <Text style={css.logoText2}>ETEC</Text>
+                                <Text style={css.logoText2}>CPS</Text>
                             </View>
                         </View>
 

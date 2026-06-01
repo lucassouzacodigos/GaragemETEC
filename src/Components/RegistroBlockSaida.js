@@ -25,7 +25,7 @@ export default function RegistroBlockSaida({carro, refresh, expandable}){
     tipo: "sucesso"
     });
 
-    const horaSaida = carro.saida?.toDatea()
+    const horaSaida = carro.saida?.toDate()
     const horaSaidaConvertida = horaSaida?.getHours().toString().padStart(2, "0") +
     ":" + horaSaida?.getMinutes().toString().padStart(2, "0")
 

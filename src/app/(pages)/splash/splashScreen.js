@@ -40,7 +40,7 @@ export default function home(){
 
                         <View style={{flexDirection:"row", alignItems:"flex-end", justifyContent:"center", width:"100%"}}>
                             <Image  source={carroLogo} style={{width:120, height:120}} />
-                            <Text style={css.logoText2}>ETEC</Text>
+                            <Text style={css.logoText2}>CPS</Text>
                         </View>
                     </View>
                     {/* LOGO */}

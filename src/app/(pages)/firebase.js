@@ -37,7 +37,6 @@ export default function home(){
 
             
             <View style={[css.quadrado, css.FlexCenter, {justifyContent:"start"}]}>
-                <Header></Header>
 
                 <TextInput style={{backgroundColor:"white", width:"80%", borderRadius:15, borderColor:"black", borderWidth:1, textAlign:"center"}} onChangeText={setMarca} placeholder="Marca"></TextInput>
                 <TextInput style={{backgroundColor:"white", width:"80%", borderRadius:15, borderColor:"black", borderWidth:1, textAlign:"center"}} onChangeText={setModelo} placeholder="Modelo"></TextInput>

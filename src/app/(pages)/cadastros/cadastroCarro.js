@@ -111,7 +111,7 @@ export default function home(){
                         {/* <InputNomeado onChangeText={} titulo={`Usuário:`} conectivo={"o"} ></InputNomeado> */}
 
                         <View style={{flexDirection:"row", marginVertical:10}}>
-                            <BotaoComImg acao={salvar} text="Salvar" largura="80%" img="save-outline" size={30}></BotaoComImg>
+                            <BotaoComImg acao={salvar} text="Salvar" largura="80%" img="save-outline" borderRadius={8} size={30}></BotaoComImg>
                         </View>
 
                     </ItemBlock>

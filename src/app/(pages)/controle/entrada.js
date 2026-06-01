@@ -260,7 +260,7 @@ export default function Entrada(props){
                                     <Checkbox size={200} value={visitante} onValueChange={setVisitanteToggle} style={{ transform: [{ scale: 1.5 }], marginRight:10 }}/>
                                     <Text style={{fontSize:20, fontWeight:"bold"}}>Visitante?</Text>
                                 </View>
-                                <BotaoComImg acao={visitante? registrarEntradaVisitante : registrarEntrada} img="save-outline" text="Salvar" largura={"80%"} size={30}/>
+                                <BotaoComImg acao={visitante? registrarEntradaVisitante : registrarEntrada} img="save-outline" text="Salvar" largura={"80%"} borderRadius={8} size={30}/>
                                 {/* <BotaoComImg acao={() => router.push("/cadastros/cadastroCarro")} img="checkmark-circle-outline" text="Salvar" largura={"80%"} size={30}/> */}
                             </ItemBlock>
                         </ScrollView>}

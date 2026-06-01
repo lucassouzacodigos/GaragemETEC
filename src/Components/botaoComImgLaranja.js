@@ -6,14 +6,14 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import { MaterialCommunityIcons as Icones } from "@expo/vector-icons";
 
 
-export default function BotaoComImg(props){
+export default function BotaoComImgLaranja(props){
 
 
     return(
-        <TouchableOpacity onPress={props.acao} style={[css.botaComImg, {width: props.largura, margin:5, justifyContent:"center", borderRadius: props.borderRadius? props.borderRadius : 7}]}>
+        <TouchableOpacity onPress={props.acao} style={[css.botaComImgLaranja, {width: props.largura, margin:5, justifyContent:"center", borderRadius: props.borderRadius}]}>
             {/* <Image source={props.img} style={{height:35, width:35, justifyContent:"center", margin:5}}></Image> */}
             <Ionicons name={props.img} size={props.size} color="white" style={{margin:5}}/>
-            <Text style={{color:"white", fontSize:25, fontWeight:"800"}}>{props.text}</Text>
+            <Text style={{color:"white", fontSize:25, fontWeight:"700"}}>{props.text}</Text>
         </TouchableOpacity>
     )
 }   

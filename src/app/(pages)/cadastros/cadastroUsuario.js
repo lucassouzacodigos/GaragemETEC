@@ -107,7 +107,7 @@ export default function home(){
                 <ItemBlock>
                     <InputNomeado onChangeText={setNome} titulo="Nome:" conectivo={"o"}/>
                     <InputNomeado onChangeText={setSobrenome} titulo="Sobrenome:" conectivo={"o"}/>
-                    <BotaoComImg acao={salvarPessoa} img="checkmark-circle-outline" text="Salvar" largura={"80%"} size={30}/>
+                    <BotaoComImg acao={salvarPessoa} img="checkmark-circle-outline" text="Salvar" borderRadius={8} largura={"80%"} size={30}/>
                     {/* <BotaoComImg acao={() => router.push("/cadastros/cadastroCarro")} img="checkmark-circle-outline" text="Salvar" largura={"80%"} size={30}/> */}
                 </ItemBlock>
             </ScrollView>

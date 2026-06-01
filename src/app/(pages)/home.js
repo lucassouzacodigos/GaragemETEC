@@ -17,8 +17,10 @@ import RegistroBlock from "../../Components/RegistroBlock";
 import RegistroBlockSaida from "../../Components/RegistroBlockSaida";
 import Alerts from "../../Components/alerts";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import BotaoComImgLaranja from "../../Components/botaoComImgLaranja";
 
 export default function Registros(){
+    console.log("Registros renderizou");
 
     const [todosRegistros, setTodosRegistros] = useState([])
     const [alertData, setAlertData] = useState({visible: false, mensagem: "", tipo: "sucesso"})
@@ -83,7 +85,7 @@ export default function Registros(){
         await AsyncStorage.removeItem('escola')
         setAlertData({visible: true, mensagem: "Deslogado com sucesso", tipo: "sucesso"})
         setTimeout(() => {
-            router.push("/definirEscola")
+            router.replace("/definirEscola")
         }, 1500);
     }
 
@@ -98,10 +100,10 @@ export default function Registros(){
                 <ScrollView style={css.mainScroll} contentContainerStyle={css.mainScrollContent}>
 
 
-                    <View style={[css.botoesRegistro, {backgroundColor:"lightblue"}]}>
-                        <BotaoComImg largura={"93%"} />
-                        <BotaoComImg largura={"45%"} />
-                        <BotaoComImg largura={"45%"} />
+                    <View style={[css.botoesRegistro, {backgroundColor:"transparent"}]}>
+                        <BotaoComImg largura={"93%"} img="add-circle-outline" text="Entrada de carro" size={35} borderRadius={10} acao={() => router.push("/controle/entrada")} />
+                        <BotaoComImgLaranja largura={"45%"} img="person-add-outline" text="Usuários" size={30} borderRadius={10} acao={() => router.push("/cadastros/cadastroUsuario")}/>
+                        <BotaoComImgLaranja largura={"45%"} img="car" text="Veículos" size={35} borderRadius={10} acao={() => router.push("/cadastros/cadastroCarro")}/>
                     </View>
 
                     <View style={{ width:"100%", paddingHorizontal:"8%"}}>
@@ -125,7 +127,7 @@ export default function Registros(){
                     {/* Sair */}
                     <ItemBlock>
                         <View style={css.sair}>
-                            <TouchableOpacity onPress={() => logout()}>
+                            <TouchableOpacity onPress={() => logout()} style={{width:"100%", alignItems:"center", justifyContent:"center"}}>
                                 <Text style={{fontWeight:"bold", fontSize:20, color:"white"}}>Sair</Text>
                             </TouchableOpacity>
                         </View>
