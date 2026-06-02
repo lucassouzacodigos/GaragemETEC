@@ -17,7 +17,7 @@ export default function RegistroBlock({carro, refresh, expandable}){
 
     const insets = useSafeAreaInsets()
     const [modalState, setModalState] = useState(false)
-    const [confirmaSaida, setConfirmaSaida] = useState(false)
+    const [confirmaSaida, setConfirmaSaida] = useState(true)
     const [loading, setLoading] = useState(false)
     const [alertData, setAlertData] = useState({
     visible: false,
@@ -101,8 +101,8 @@ export default function RegistroBlock({carro, refresh, expandable}){
                 
 
             {modalState && 
-                <TouchableOpacity onPress={requestSaida} style={{backgroundColor:"red", height:50, width:"100%", borderRadius:200, margin:10, alignItems:"center", justifyContent:"center", elevation:5 }}>
-                    <Text adjustsFontSizeToFit  numberOfLines={1} style={{color:"white", fontSize:15, fontWeight:"bold"}}>Dar Saida do estacionamento</Text>
+                <TouchableOpacity onPress={requestSaida} style={[css.sombra,{backgroundColor:"red", height:50, width:"100%", borderRadius:200, margin:10, alignItems:"center", justifyContent:"center", elevation:5 }]}>
+                    <Text adjustsFontSizeToFit  numberOfLines={1} style={[{color:"white", fontSize:15, fontWeight:"bold"}]}>Dar Saida do estacionamento</Text>
                 </TouchableOpacity>
             }
 
@@ -114,8 +114,10 @@ export default function RegistroBlock({carro, refresh, expandable}){
                 justifyContent:"center", 
                 borderRadius:10,}}>
                     {/* Conteúdo */}
-                    <View style={{width:"80%", 
+                    <View style={{width:"95%", 
                         height:"auto", 
+                        paddingVertical:25,
+                        paddingHorizontal:10,
                         backgroundColor:"rgba(255, 255, 255, 1)", 
                         alignItems:"center", 
                         justifyContent:"center", 

@@ -15,8 +15,8 @@ export default function NavBar(props){
     const isActive = (rota) => pagina === rota
 
     return(
-        <View style={css.navBarContainer}>
-            <View style={css.navItemsContainer}>
+        <View style={[css.navBarContainer, {}]}>
+            <View style={[css.navItemsContainer, css.sombra]}>
 
                 <TouchableOpacity onPress={() => router.replace("/home")} style={isActive("/home")? css.navItemSelected : css.navItem}>
                     <Ionicons 

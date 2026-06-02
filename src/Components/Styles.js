@@ -10,7 +10,9 @@ export const css = StyleSheet.create({
     bold: {
         fontWeight:"bold"
     },
-
+    sombra: {
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.50)",
+    },
     FlexCenter:{
         alignItems: "center",
         justifyContent: "center",
@@ -65,7 +67,8 @@ export const css = StyleSheet.create({
         borderRadius:7,
         borderColor: "transparent",
         borderWidth:1,
-        elevation:5,
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.30)",  
+
     },
     botaComImgLaranja:{
         alignItems:"center",
@@ -77,7 +80,8 @@ export const css = StyleSheet.create({
         borderRadius:7,
         borderColor: "transparent",
         borderWidth:2,
-        elevation:5,
+        // elevation:2,
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.30)",  
     },
     botao:{
         margin:5,
@@ -85,8 +89,9 @@ export const css = StyleSheet.create({
         height: 30,
         backgroundColor: "#f5f5f5",
         borderRadius: 15,
-        borderWidth: 2,
-        borderColor: "rgba(53, 53, 53, 1)00ff"
+        borderWidth: 0,
+        borderColor: "rgba(53, 53, 53, 1)00ff",
+        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.50)",  
     },
     // text
     logoText1:{
@@ -107,7 +112,7 @@ export const css = StyleSheet.create({
     navBarContainer:{
         width:"100%",
         height:"14%",
-        backgroundColor:"white",
+        backgroundColor:"#ebebeb",
         flexDirection:"row",
         alignItems:"start",
         justifyContent:"space-around",
@@ -140,7 +145,7 @@ export const css = StyleSheet.create({
         margin:2
     },
     mainScroll:{
-        backgroundColor:"white",
+        backgroundColor:"#ebebeb",
         width:"100%",
         height:"auto",
         padding:10

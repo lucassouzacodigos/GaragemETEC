@@ -67,6 +67,7 @@ export default function Entrada(props){
                             <Text style={[css.TituloPagina, {}]}>Registrar saída da ETEC:</Text>
                         </View>
 
+                        {/* caso estacionamento esteja vazio */}
                         {carrosDentro.length == 0 && <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
                             <ItemBlock>
                                 <Text style={{fontSize:15, fontWeight:"bold", color:"black", marginTop:15}}>Sem carros estacionados no momento</Text>
@@ -74,6 +75,8 @@ export default function Entrada(props){
                             </ItemBlock>
                         </ScrollView>}
 
+
+                        {/* Caso tenha carros */}
                         {carrosDentro.length > 0 && <ScrollView style={[css.mainScroll]} contentContainerStyle={css.mainScrollContent}>
                             <ItemBlock>
                                 {carrosDentro.map((carro) => (
