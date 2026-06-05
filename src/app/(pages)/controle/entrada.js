@@ -125,6 +125,22 @@ export default function Entrada(props){
     }
 
     const registrarEntrada = async () => {
+
+        //Verifica se o esta sendo dado entrada em um carro que ja entrou, e nao saiu ainda
+        const q = query(collection(db, "movimentacoes"), where("placa", "==", placa), where("saida", "==", null));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            setAlertData({
+                visible: true,
+                mensagem: "Este veículo já possui uma entrada em aberto",
+                tipo: "erro"
+            });
+            return;
+}
+
+
+
+
         const escola = await AsyncStorage.getItem('escola')
 
         if (
@@ -180,12 +196,14 @@ export default function Entrada(props){
             placa: placa,
             entrada: Timestamp.now(),
             saida: null,
-            visitante: true
+            visitante: true,
+            escola: escola
             });
+
 
             setAlertData({
                 visible: true,
-                mensagem: "Entrada registrada com sucesso",
+                mensagem: "Visitante registrada com sucesso",
                 tipo: "sucesso"
             });
     };

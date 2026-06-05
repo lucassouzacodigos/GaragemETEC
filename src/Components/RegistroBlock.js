@@ -17,7 +17,7 @@ export default function RegistroBlock({carro, refresh, expandable}){
 
     const insets = useSafeAreaInsets()
     const [modalState, setModalState] = useState(false)
-    const [confirmaSaida, setConfirmaSaida] = useState(true)
+    const [confirmaSaida, setConfirmaSaida] = useState(false)
     const [loading, setLoading] = useState(false)
     const [alertData, setAlertData] = useState({
     visible: false,

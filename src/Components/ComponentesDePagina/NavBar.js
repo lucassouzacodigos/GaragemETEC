@@ -58,6 +58,14 @@ export default function NavBar(props){
                     />
                 </TouchableOpacity>
 
+                {/* <TouchableOpacity onPress={() => router.replace("/cadastros/cadastroUnico")} style={isActive("/cadastros/cadastroUnico")? css.navItemSelected : css.navItem}>
+                    <Ionicons 
+                        name={pagina == "/cadastros/cadastroUnico" ? "people" : "people-outline"} 
+                        size={iconSize} color="black" 
+                        style={css.navBarItens} 
+                    />
+                </TouchableOpacity> */}
+
                 
 
 

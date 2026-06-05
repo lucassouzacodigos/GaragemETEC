@@ -63,7 +63,7 @@ export default function home(){
     }, [])
 
     useEffect(() => {
-        console.log("rodou")
+        console.log("rodou", pesquisa)
             // se pesquisa estiver vazia
             if (pesquisa.trim() === '') {
                 setUsuarios(usuariosOriginais)
@@ -148,6 +148,8 @@ export default function home(){
     const [nome, setNome] = useState()
     const [sobrenome, setSobrenome] = useState()
     const [modalState, setModalState] = useState(false)
+    const [idSelected, setIdSelected] = useState()
+    const [carros, setCarros] = useState()
 
     const [usuarios, setUsuarios] = useState([])    
     const [usuariosOriginais, setUsuariosOriginais] = useState([])
@@ -178,6 +180,7 @@ export default function home(){
                         <Text style={[css.TituloPagina, {}]}>Cadastro Unico:</Text>
                     </View>
 
+                    {/* Carro */}
                     <ItemBlock>
                         <Text>Informaçoes sobre o carro</Text>
                         <InputNomeado onChangeText={setPlaca} titulo={`Placa:`} conectivo={"seu"} ></InputNomeado>
@@ -186,7 +189,10 @@ export default function home(){
                         {/* <InputNomeado onChangeText={} titulo={`Usuário:`} conectivo={"o"} ></InputNomeado> */}
                     </ItemBlock>
 
-                    <ItemBlock>
+                    <Botao cor={"verde"} text={"Buscar Usuários"} largura={"100%"} acao={() => setPesquisa("aids")} ></Botao>
+
+                    {/* Proprietario */}
+                    <ItemBlock> 
                         <Text>Proprietário</Text>
 
                         <InputNomeado value={nome} onChangeText={setNome} titulo="Nome:" conectivo={"o"} 
@@ -235,7 +241,7 @@ export default function home(){
                     contentContainerStyle={css.mainScrollContent}>
                     
                     {/* input pesquisa */}
-                    <InputNomeado onChangeText={setPesquisa} titulo="Pesquisa:" conectivo={"a"} largura={"50%"}/> 
+                    <InputNomeado value={pesquisa} onChangeText={setPesquisa} titulo="Pesquisa:" conectivo={"a"} largura={"50%"}/> 
                     <Text>{pesquisa}</Text>
 
                     <TouchableOpacity onPress={() =>setModalState(false)}>

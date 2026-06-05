@@ -6,7 +6,7 @@ import Botao from "../../../Components/botao"
 import { useState } from "react";
 import ItemBlock from "../../../Components/itemBlock"
 import { db } from "../../../Services/FirebaseParams";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp, getDocs, getDoc, query, where } from "firebase/firestore";
 import carroLogo from '../../../assets/carroLogo.png'
 import InputNomeado from "../../../Components/inputNomeado";
 import marcas from '../../../Listas/marcas'
@@ -38,6 +38,20 @@ export default function home(){
 
 
     const salvar = async () => {
+
+        //Verifica se a placa ja esta cadastrada
+        const querySnapshot = await getDocs(query(collection(db, "carros"), where("placa", "==", placa)));
+        if(!querySnapshot.empty){
+            setAlertData({
+                visible: true,
+                mensagem: "Ja existe um carro com essa placa",
+                tipo: "erro"
+            });
+            return
+        }
+
+
+
         //validaçao dos dados antes de salvar, se algum campo nao estiver preenchido, nao salva
         const escola = await AsyncStorage.getItem('escola')
 
@@ -104,7 +118,7 @@ export default function home(){
                     </View>
 
                     <ItemBlock>
-                        <InputNomeado onChangeText={setPlaca} titulo={`Placa:`} conectivo={"seu"} ></InputNomeado>
+                        <InputNomeado onChangeText={setPlaca} titulo={`Placa:`} conectivo={"a"} ></InputNomeado>
                         <InputNomeado onChangeText={setModelo} titulo={`Modelo:`} conectivo={"o"} ></InputNomeado>
                         <InputNomeado onChangeText={setCor} titulo={`Cor:`} conectivo={"a"} ></InputNomeado>
                         <SelectPessoa onSelect={(id) => setUsuarioID(id)} ></SelectPessoa>

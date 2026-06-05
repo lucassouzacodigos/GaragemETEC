@@ -6,7 +6,7 @@ import Botao from "../../../Components/botao"
 import { useState } from "react";
 import ItemBlock from "../../../Components/itemBlock"
 import { db } from "../../../Services/FirebaseParams";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, Timestamp, getDocs, getDoc, query, where } from "firebase/firestore";
 import carroLogo from '../../../assets/carroLogo.png'
 import InputNomeado from "../../../Components/inputNomeado";
 import marcas from '../../../Listas/marcas'
@@ -22,6 +22,18 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function home(){
 
     const salvarPessoa = async () => {
+
+        //Verifica se ja existe alguem com esse nome
+        const querySnapshot = await getDocs(query(collection(db, "pessoas"), where("nome", "==", formatarNome(nome)),where("sobrenome", "==", formatarNome(sobrenome))));
+        if(!querySnapshot.empty){
+            setAlertData({
+                visible: true,
+                mensagem: "Ja existe um usuario com esse nome",
+                tipo: "erro"
+            });
+            return
+        }
+
         //Validaçoes para salvar o nome no banco do firebase
         const escola = await AsyncStorage.getItem('escola')
 

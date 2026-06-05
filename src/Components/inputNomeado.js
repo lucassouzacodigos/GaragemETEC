@@ -14,7 +14,7 @@ export default function InputNomeado({titulo, onChangeText, conectivo, children,
             <View style={{backgroundColor:"transparent", flexDirection:"row"}}>
                 <TextInput
                     value={value}
-                    placeholder={`Insira ${conectivo} ${titulo}`} 
+                    placeholder={`Digite ${conectivo} ${titulo}`} 
                     style={[css.inputComBorda, {}]} 
                     onChangeText={onChangeText}
                     secureTextEntry={secureTextEntry}
